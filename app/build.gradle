@@ -5,7 +5,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "info.androidhive.tabsswipe"
+        applicationId "info.ags.tabsswipe"
         minSdkVersion 11
         targetSdkVersion 17
     }
