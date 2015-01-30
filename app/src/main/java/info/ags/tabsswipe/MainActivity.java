@@ -1,6 +1,6 @@
-package info.androidhive.tabsswipe;
+package info.ags.tabsswipe;
 
-import info.androidhive.tabsswipe.adapter.TabsPagerAdapter;
+import info.ags.tabsswipe.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;

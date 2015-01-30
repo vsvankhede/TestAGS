@@ -1,9 +1,7 @@
-package info.androidhive.tabsswipe.adapter;
+package info.ags.tabsswipe.adapter;
 
-import info.androidhive.tabsswipe.AddFragment;
-import info.androidhive.tabsswipe.ListFragment;
-import info.androidhive.tabsswipe.MoviesFragment;
-
+import info.ags.tabsswipe.AddFragment;
+import info.ags.tabsswipe.ListFragm;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,10 +21,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			return new AddFragment();
 		case 1:
 			// Games fragment activity
-			return new ListFragment();
-		case 2:
-			// Movies fragment activity
-			return new MoviesFragment();
+			return new ListFragm();
 		}
 
 		return null;
@@ -35,7 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 3;
+		return 2;
 	}
 
 }

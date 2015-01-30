@@ -1,7 +1,7 @@
 /**
  * Automatically generated file. DO NOT MODIFY
  */
-package info.androidhive.tabsswipe;
+package info.ags.tabsswipe;
 
 public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");

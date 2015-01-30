@@ -1,9 +1,7 @@
-package info.androidhive.tabsswipe;
+package info.ags.tabsswipe;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,9 +19,12 @@ public class AddFragment extends Fragment {
     private static int LOAD_IMAGE_RESULTS = 1;
     Button btn_img,btn_add;
     EditText et_title, et_desc;
-    private ImageView image;
     private TimePicker timePicker1;
     private DatePicker datePicker;
+
+
+
+    private String imagePath = null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class AddFragment extends Fragment {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 // Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
-                startActivityForResult(i, LOAD_IMAGE_RESULTS);
+                getActivity().startActivityForResult(i, LOAD_IMAGE_RESULTS);
             }
         });
         // Click Listner event for save data
@@ -67,8 +68,9 @@ public class AddFragment extends Fragment {
                 String dt_time = hour+":"+min;
                 String dt_date = year+"/"+month+"/"+day;
                 MyDatabase md = new MyDatabase(getActivity());
-                md.setApnt(title,desc,dt_date,dt_time,"dsfadsf");
-            }
+                md.setApnt(title,desc,dt_date,dt_time,getImagePath());
+
+               }
         });
 
 
@@ -82,22 +84,30 @@ public class AddFragment extends Fragment {
         // Here we need to check if the activity that was triggers was the Image Gallery.
         // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
         // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
-        if (requestCode == LOAD_IMAGE_RESULTS && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == LOAD_IMAGE_RESULTS ) {
             // Let's read picked image data - its URI
             Uri pickedImage = data.getData();
             // Let's read picked image path using content resolver
             String[] filePath = { MediaStore.Images.Media.DATA };
             Cursor cursor = getActivity().getContentResolver().query(pickedImage, filePath, null, null, null);
             cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            setImagePath(cursor.getString(cursor.getColumnIndex(filePath[0])));
 
+            imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            System.out.println(imagePath);
             // Now we need to set the GUI ImageView data with data read from the picked file.
-            image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            //image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 
             // At the end remember to close the cursor or you will end with the RuntimeException!
             cursor.close();
         }
     }
+    public String getImagePath() {
+        return imagePath;
+    }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
 }

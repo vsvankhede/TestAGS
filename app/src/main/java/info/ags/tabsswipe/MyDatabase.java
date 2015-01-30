@@ -1,11 +1,10 @@
-package info.androidhive.tabsswipe;
+package info.ags.tabsswipe;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.widget.Toast;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -17,20 +16,14 @@ public class MyDatabase extends SQLiteAssetHelper {
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-        // you can use an alternate constructor to specify a database location
-        // (such as a folder on the sd card)
-        // you must ensure that this folder is available and you have permission
-        // to write to it
-        //super(context, DATABASE_NAME, context.getExternalFilesDir(null).getAbsolutePath(), null, DATABASE_VERSION);
-
     }
 
-    public Cursor getEmployees() {
+    public Cursor getApnt() {
 
         SQLiteDatabase db = getWritableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String [] sqlSelect = {"title", "desc", "date", "time", "pics"};
+        String [] sqlSelect = {"rowid AS _id","title", "desc", "date", "time", "pics"};
         String sqlTables = "tbl_apnt";
 
         qb.setTables(sqlTables);
